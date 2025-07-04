@@ -107,12 +107,13 @@ def extract_info(file_name: str, file_size: int, default_caption: str) -> dict:
     return {
         "file_name": file_name,
         "file_size": get_size(file_size),
+        "titleonly": extract_titleonly(file_name),
         "file_caption": default_caption,
         "languages": extract_language(default_caption),
         "subtitles": extract_subtitles(default_caption),
         "duration": "00:00:00",  # TODO: Add actual duration if available
         "ott": extract_ott(default_caption),
-        "title": extract_title_only(file_name),
+        "title": extract_title(file_name),
         "resolution": extract_resolution(default_caption),
         "name": extract_clean_title(default_caption),
         "year": extract_year(default_caption),
@@ -623,7 +624,7 @@ def extract_extension(text):
 
     return convert_font(".mkv")
 
-def extract_title_only(text):
+def extract_title(text):
     if not text:
         return convert_font(Unknown Title")
 
