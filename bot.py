@@ -1,6 +1,6 @@
+import asyncio
 from pyrogram import Client
 from info import *
-
 
 class Bot(Client):
     def __init__(self):
@@ -29,5 +29,13 @@ class Bot(Client):
         print(f"{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️")
         await self.send_message(ADMIN, f"**{me.first_name}  Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️**")
 
+    async def stop(self):
+        await super().stop()
 
-Bot().run()
+async def main():
+    bot = Bot()
+    await bot.start()
+    await asyncio.Event().wait()  # Keeps running forever unless cancelled
+
+if __name__ == "__main__":
+    asyncio.run(main())
